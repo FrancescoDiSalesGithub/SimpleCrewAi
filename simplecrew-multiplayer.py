@@ -30,8 +30,8 @@ with (open(sys.argv[1],"r")) as yaml_file:
         source_code_port_replace = source_code.replace("{PORT}",str(agents_item["port"]))
 
         agent_code = base64.b64decode(chunky.put_agent()).decode("utf-8")
-        vector_code = chunky.vectoragent()
-        vector_manager_code = chunky.vectormanager()
+        vector_code = base64.b64decode(chunky.vectoragent()).decode("utf-8")
+        vector_manager_code = base64.b64decode(chunky.vectormanager()).decode("utf-8")
 
         with(open(str(agents_item['name'])+".py","w")) as file_agent:
             file_agent.write(source_code_port_replace)
