@@ -83,75 +83,51 @@ c3REYXRhLmpzb24oKVsncmVzcG9uc2UnXQoK
 
 def vectormanager():
     return """
-import chromadb
-import requests
-from flask import jsonify
-
-import random
-
-class vectorManager:
-
-    def __init__(self,collection):
-        self.__client = chromadb.Client()
-        self.__collection = collection
-
-    def add_or_create_data(self,data,topic,topic_id):
-
-        collection = self.__client.get_or_create_collection(name=self.__collection)
-        collection.add(documents = data,metadatas= topic,ids= topic_id)
-
-        done_operation = {"operation":"concluded"}
-        return jsonify(done_operation)
-
-    def give_data(self,topic,query):
-
-        collection = self.__client.get_or_create_collection(name=self.__collection)
-        result = collection.query(query_texts= query,where_document={"$contains":query})
-        
-        return jsonify(result)
-    
-    def train(self,query,model):
-        
-        collection = self.__client.get_or_create_collection(name=self.__collection)
-        result = collection.query(query_texts=query,where_document={"$contains":query},include=["documents"])
-        
-        for item in result["documents"]:
-            print(item)
-            knowledge_data = {"model":model,"input":item}    
-            embedding_data = requests.post("http://localhost:11434/api/embeddings",json=knowledge_data)
-
-        done_operation = {"operation":"concluded"}
-        return jsonify(done_operation)
-
-    def delete_collection(self):
-        self.__client.delete_collection(name=self.__collection)
-            """
+aW1wb3J0IGNocm9tYWRiCmltcG9ydCBjaHJvbWFkYi5hcGkKCmltcG9ydCBjaHJvbWFkYi5zZXJ2
+ZXIKaW1wb3J0IHJlcXVlc3RzCmZyb20gZmxhc2sgaW1wb3J0IGpzb25pZnkKCmltcG9ydCByYW5k
+b20KCmNsYXNzIHZlY3Rvck1hbmFnZXI6CgogICAgZGVmIF9faW5pdF9fKHNlbGYsY29sbGVjdGlv
+bik6CiAgICAgICAgCiAgICAgICAgc2VsZi5fX2NvbGxlY3Rpb24gPSBjb2xsZWN0aW9uCiAgICAg
+ICAgc2VsZi5fX2NsaWVudCA9IGNocm9tYWRiLlBlcnNpc3RlbnRDbGllbnQocGF0aD0icGVyc2lz
+dGVudC5ibGsiKQoKICAgIGRlZiBhZGRfb3JfY3JlYXRlX2RhdGEoc2VsZixkYXRhLHRvcGljLHRv
+cGljX2lkKToKCiAgICAgICAgY29sbGVjdGlvbiA9IHNlbGYuX19jbGllbnQuZ2V0X29yX2NyZWF0
+ZV9jb2xsZWN0aW9uKG5hbWU9c2VsZi5fX2NvbGxlY3Rpb24pCiAgICAgICAgY2hyb21hZGIuc2Vy
+dmVyLlNlcnZlcigpCiAgICAgICAgY29sbGVjdGlvbi5hZGQoZG9jdW1lbnRzID0gZGF0YSxtZXRh
+ZGF0YXM9IHRvcGljLGlkcz0gdG9waWNfaWQpCgogICAgICAgIGRvbmVfb3BlcmF0aW9uID0geyJv
+cGVyYXRpb24iOiJjb25jbHVkZWQifQogICAgICAgIHJldHVybiBqc29uaWZ5KGRvbmVfb3BlcmF0
+aW9uKQoKICAgIGRlZiBnaXZlX2RhdGEoc2VsZix0b3BpYyxxdWVyeSk6CgogICAgICAgIGNvbGxl
+Y3Rpb24gPSBzZWxmLl9fY2xpZW50LmdldF9vcl9jcmVhdGVfY29sbGVjdGlvbihuYW1lPXNlbGYu
+X19jb2xsZWN0aW9uKQogICAgICAgIHJlc3VsdCA9IGNvbGxlY3Rpb24ucXVlcnkocXVlcnlfdGV4
+dHM9IHF1ZXJ5LHdoZXJlX2RvY3VtZW50PXsiJGNvbnRhaW5zIjpxdWVyeX0pCiAgICAgICAgCiAg
+ICAgICAgcmV0dXJuIGpzb25pZnkocmVzdWx0KQogICAgCiAgICBkZWYgdHJhaW4oc2VsZixxdWVy
+eSxtb2RlbCk6CiAgICAgICAgCiAgICAgICAgY29sbGVjdGlvbiA9IHNlbGYuX19jbGllbnQuZ2V0
+X29yX2NyZWF0ZV9jb2xsZWN0aW9uKG5hbWU9c2VsZi5fX2NvbGxlY3Rpb24pCiAgICAgICAgcmVz
+dWx0ID0gY29sbGVjdGlvbi5xdWVyeShxdWVyeV90ZXh0cz1xdWVyeSx3aGVyZV9kb2N1bWVudD17
+IiRjb250YWlucyI6cXVlcnl9LGluY2x1ZGU9WyJkb2N1bWVudHMiXSkKICAgICAgICAKICAgICAg
+ICBmb3IgaXRlbSBpbiByZXN1bHRbImRvY3VtZW50cyJdOgogICAgICAgICAgICBwcmludChpdGVt
+KQogICAgICAgICAgICBrbm93bGVkZ2VfZGF0YSA9IHsibW9kZWwiOm1vZGVsLCJpbnB1dCI6aXRl
+bX0gICAgCiAgICAgICAgICAgIGVtYmVkZGluZ19kYXRhID0gcmVxdWVzdHMucG9zdCgiaHR0cDov
+L2xvY2FsaG9zdDoxMTQzNC9hcGkvZW1iZWRkaW5ncyIsanNvbj1rbm93bGVkZ2VfZGF0YSkKCiAg
+ICAgICAgZG9uZV9vcGVyYXRpb24gPSB7Im9wZXJhdGlvbiI6ImNvbmNsdWRlZCJ9CiAgICAgICAg
+cmV0dXJuIGpzb25pZnkoZG9uZV9vcGVyYXRpb24pCgogICAgZGVmIGRlbGV0ZV9jb2xsZWN0aW9u
+KHNlbGYpOgogICAgICAgIHNlbGYuX19jbGllbnQuZGVsZXRlX2NvbGxlY3Rpb24obmFtZT1zZWxm
+Ll9fY29sbGVjdGlvbikKICAgICAgICA=
+    """
 
 def vectoragent():
     return  str("""
-import agent
-import vectormanager
-
-class vectorAgent(agent.agent):
-    
-    def __init__(self,name_collection,data_put,topic,topic_id):
-        self.__namecollection = name_collection
-        self.__dataplain = data_put
-        self.__topic = topic
-        self.__topicid = topic_id
-
-    def doVector(self):
-        vector = vectormanager.vectorManager(self.__namecollection)
-        return vector.add_or_create_data(data=self.__dataplain,topic=self.__topic,topic_id=self.__topicid)       
-         
-
-    def getVector(self):
-        vector = vectormanager.vectorManager(self.__namecollection)
-        return  vector.give_data(self.__topic,self.__dataplain)
-
-
-
-    def trainLLM(self,query,model):
-        vector = vectormanager.vectorManager(self.__namecollection)
-        return vector.train(query,model)
+aW1wb3J0IGFnZW50CmltcG9ydCB2ZWN0b3JtYW5hZ2VyCgpjbGFzcyB2ZWN0b3JBZ2VudChhZ2Vu
+dC5hZ2VudCk6CiAgICAKICAgIGRlZiBfX2luaXRfXyhzZWxmLG5hbWVfY29sbGVjdGlvbixkYXRh
+X3B1dCx0b3BpYyx0b3BpY19pZCk6CiAgICAgICAgc2VsZi5fX25hbWVjb2xsZWN0aW9uID0gbmFt
+ZV9jb2xsZWN0aW9uCiAgICAgICAgc2VsZi5fX2RhdGFwbGFpbiA9IGRhdGFfcHV0CiAgICAgICAg
+c2VsZi5fX3RvcGljID0gdG9waWMKICAgICAgICBzZWxmLl9fdG9waWNpZCA9IHRvcGljX2lkCgog
+ICAgZGVmIGRvVmVjdG9yKHNlbGYpOgogICAgICAgIHZlY3RvciA9IHZlY3Rvcm1hbmFnZXIudmVj
+dG9yTWFuYWdlcihzZWxmLl9fbmFtZWNvbGxlY3Rpb24pCiAgICAgICAgcmV0dXJuIHZlY3Rvci5h
+ZGRfb3JfY3JlYXRlX2RhdGEoZGF0YT1zZWxmLl9fZGF0YXBsYWluLHRvcGljPXNlbGYuX190b3Bp
+Yyx0b3BpY19pZD1zZWxmLl9fdG9waWNpZCkgICAgICAgCiAgICAgICAgIAoKICAgIGRlZiBnZXRW
+ZWN0b3Ioc2VsZik6CiAgICAgICAgdmVjdG9yID0gdmVjdG9ybWFuYWdlci52ZWN0b3JNYW5hZ2Vy
+KHNlbGYuX19uYW1lY29sbGVjdGlvbikKICAgICAgICByZXR1cm4gIHZlY3Rvci5naXZlX2RhdGEo
+c2VsZi5fX3RvcGljLHNlbGYuX19kYXRhcGxhaW4pCgoKCiAgICBkZWYgdHJhaW5MTE0oc2VsZixx
+dWVyeSxtb2RlbCk6CiAgICAgICAgdmVjdG9yID0gdmVjdG9ybWFuYWdlci52ZWN0b3JNYW5hZ2Vy
+KHNlbGYuX19uYW1lY29sbGVjdGlvbikKICAgICAgICByZXR1cm4gdmVjdG9yLnRyYWluKHF1ZXJ5
+LG1vZGVsKQ==
     """)
