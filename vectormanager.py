@@ -1,4 +1,7 @@
 import chromadb
+import chromadb.api
+
+import chromadb.server
 import requests
 from flask import jsonify
 
@@ -7,12 +10,14 @@ import random
 class vectorManager:
 
     def __init__(self,collection):
-        self.__client = chromadb.Client()
+        
         self.__collection = collection
+        self.__client = chromadb.PersistentClient(path="persistent.blk")
 
     def add_or_create_data(self,data,topic,topic_id):
 
         collection = self.__client.get_or_create_collection(name=self.__collection)
+        chromadb.server.Server()
         collection.add(documents = data,metadatas= topic,ids= topic_id)
 
         done_operation = {"operation":"concluded"}
