@@ -1,7 +1,6 @@
 import chromadb
 import chromadb.api
 
-import chromadb.server
 import requests
 from flask import jsonify
 
@@ -17,7 +16,6 @@ class vectorManager:
     def add_or_create_data(self,data,topic,topic_id):
 
         collection = self.__client.get_or_create_collection(name=self.__collection)
-        chromadb.server.Server()
         collection.add(documents = data,metadatas= topic,ids= topic_id)
 
         done_operation = {"operation":"concluded"}
