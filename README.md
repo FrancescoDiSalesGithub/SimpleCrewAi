@@ -25,7 +25,15 @@ agents:
 
 ```
 
-After saving the file run **python3 simplecrew-multiplayer.py agent.yaml /destination/pth** wait for the run of the script and then go to the destination folder. In the destination folder you have each folder with the name of your agent, go in that directory and the run:
+After saving the file run:
+
+```
+
+python3 simplecrew-multiplayer.py agent.yaml /destination/path
+
+```
+
+wait for the run of the script and then go to the destination folder. In the destination folder you have each folder with the name of your agent, go in that directory and the run:
 
 ```
 python3 agent-name.py
