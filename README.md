@@ -73,7 +73,7 @@ It inserts in the vector database some values as the following:
 {
 
 "collection":"name of the collection",
-"prompt":["the sky is blue","donkeys can not fly"]
+"prompt":["the sky is blue","donkeys can not fly"],
 "topic": "obvious things",
 "topic_id": ["obvious_things_id_1","obvious_things_id_2"]
 
