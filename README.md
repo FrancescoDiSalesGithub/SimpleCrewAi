@@ -55,7 +55,7 @@ The /task api accepts as http method POST and a json body like the following:
 {
 
 "name":"name of your agent",
-"tasks":["what is the meaning of life?","who is luke skywalker?"]
+"tasks":["what is the meaning of life?","who is luke skywalker?"],
 "web": true,
 "model": "mistral"
 
