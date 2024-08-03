@@ -1,8 +1,11 @@
 import chromadb
 import chromadb.api
 
+
 import requests
 from flask import jsonify
+
+from chromadb import Settings
 
 import duckduckgo_search
 
