@@ -21,7 +21,7 @@ class vectorAgent(agent.agent):
         vector = vectormanager.vectorManager(self.__namecollection)
         return vector.remove_data(query)
 
-    def removeCollection(self,collection):
+    def removeCollection(self):
         vector = vectormanager.vectorManager(self.__namecollection)       
         return vector.delete_collection()
 

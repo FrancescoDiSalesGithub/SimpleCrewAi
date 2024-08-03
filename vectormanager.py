@@ -38,7 +38,7 @@ class vectorManager:
         operation = {"operation":"concluded"}
         return jsonify(operation)
 
-    def delete_collection(self):
+    def gidelete_collection(self):
         self.__client.delete_collection(name=self.__collection)
 
         operation = {"operation":"concluded"}
