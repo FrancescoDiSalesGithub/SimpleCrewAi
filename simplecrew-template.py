@@ -84,7 +84,8 @@ def populate_web_vector():
     vector_agent = vectoragent.vectorAgent(name_collection=collection,data_put=None,topic=None,topic_id=None)
     vector_agent.populateWebVector(search_term) 
 
-@app.route("/updatevector",methods=['POST']):
+@app.route("/updatevector",methods=['POST'])
+def update_vector():
     json_data = request.json
     collection = json_data.get('collection')
     vector_data = json_data.get('prompt')
