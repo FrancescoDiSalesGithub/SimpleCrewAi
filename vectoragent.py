@@ -13,12 +13,25 @@ class vectorAgent(agent.agent):
         vector = vectormanager.vectorManager(self.__namecollection)
         return vector.add_or_create_data(data=self.__dataplain,topic=self.__topic,topic_id=self.__topicid)       
          
-
     def getVector(self):
         vector = vectormanager.vectorManager(self.__namecollection)
         return  vector.give_data(self.__topic,self.__dataplain)
 
+    def removeVector(self,query):
+        vector = vectormanager.vectorManager(self.__namecollection)
+        vector.remove_data(query)
 
+    def removeCollection(self,collection):
+        vector = vectormanager.vectorManager(self.__namecollection)       
+        vector.delete_collection()
+
+    def populateWebVector(self,search_query):
+        vector = vectormanager.vectorManager(self.__namecollection)
+        vector.web_collection(search_query)
+        
+    def updateVector(self):
+        vector = vectormanager.vectorManager(self.__namecollection)
+        vector.update_data()
 
     def trainLLM(self,query,model):
         vector = vectormanager.vectorManager(self.__namecollection)
