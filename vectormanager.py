@@ -69,9 +69,21 @@ class vectorManager:
         topic_id = str(query)
 
         duck_duck_search = duckduckgo_search.DDGS().text(query,max_results=5)
+        material_to_learn = []
 
-        for item in duck_duck_search:
-            collection.add(documents = data,metadatas= metadata,ids= topic_id)
+        for search_result in duck_duck_search:
+            material_to_learn.append(search_result["body"])
+
+        counter = 0
+
+        for item in material_to_learn:
+            ids_list = []
+            
+            ids_list.append(topic_id+"_"+str(counter))
+            collection.add(documents = item,metadatas= metadata,ids= ids_list)
+
+            ids_list.clear()
+            counter = counter + 1
 
         operation = {"operation":"concluded"}
         return jsonify(operation)

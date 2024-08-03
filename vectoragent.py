@@ -19,19 +19,19 @@ class vectorAgent(agent.agent):
 
     def removeVector(self,query):
         vector = vectormanager.vectorManager(self.__namecollection)
-        vector.remove_data(query)
+        return vector.remove_data(query)
 
     def removeCollection(self,collection):
         vector = vectormanager.vectorManager(self.__namecollection)       
-        vector.delete_collection()
+        return vector.delete_collection()
 
     def populateWebVector(self,search_query):
         vector = vectormanager.vectorManager(self.__namecollection)
-        vector.web_collection(search_query)
+        return vector.web_collection(search_query)
         
     def updateVector(self):
         vector = vectormanager.vectorManager(self.__namecollection)
-        vector.update_data()
+        return vector.update_data()
 
     def trainLLM(self,query,model):
         vector = vectormanager.vectorManager(self.__namecollection)
