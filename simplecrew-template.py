@@ -82,7 +82,7 @@ def populate_web_vector():
     search_term = json_data.get('query')
 
     vector_agent = vectoragent.vectorAgent(name_collection=collection,data_put=None,topic=None,topic_id=None)
-    vector_agent.populateWebVector(search_term) 
+    return vector_agent.populateWebVector(search_term) 
 
 @app.route("/updatevector",methods=['POST'])
 def update_vector():

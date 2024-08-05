@@ -44,8 +44,12 @@ class vectorManager:
         operation = {"operation":"concluded"}
         return jsonify(operation)
 
-    def update_data(self):
-        pass
+    def update_data(self,ids_collection,metadata,document):
+        collection = self.__client.get_or_create_collection(name=self.__collection)
+        collection.update(ids=ids_collection,metadatas=metadata,documents=document)
+
+        operation = {"operation":"concluded"}
+        return jsonify(operation)
         
 
 

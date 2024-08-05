@@ -31,7 +31,7 @@ class vectorAgent(agent.agent):
         
     def updateVector(self):
         vector = vectormanager.vectorManager(self.__namecollection)
-        return vector.update_data()
+        return vector.update_data(self.__topicid,self.__topic,self.__dataplain)
 
     def trainLLM(self,query,model):
         vector = vectormanager.vectorManager(self.__namecollection)
