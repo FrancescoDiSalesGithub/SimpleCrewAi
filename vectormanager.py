@@ -38,7 +38,7 @@ class vectorManager:
         operation = {"operation":"concluded"}
         return jsonify(operation)
 
-    def gidelete_collection(self):
+    def delete_collection(self):
         self.__client.delete_collection(name=self.__collection)
 
         operation = {"operation":"concluded"}
@@ -46,6 +46,7 @@ class vectorManager:
 
     def update_data(self):
         pass
+        
 
 
     def train(self,query,model):
