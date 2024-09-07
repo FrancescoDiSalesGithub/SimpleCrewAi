@@ -47,7 +47,11 @@ These are the following rest api of your agent:
 - /vector
 - /retrievevector
 - /trainvector
-
+- /deletevector
+- /deletecollection
+- /populatewebvector
+- /updatevector
+  
 ## Task
 
 The /task api accepts as http method POST and a json body like the following:
@@ -117,6 +121,63 @@ It will train the ai model from the data stored in the vector database:
 ```
 
 In response the api will notify the user with the operation of adding embeddings to the ai model has been completed
+
+# Delete vector
+
+Deletes a vector record using a query in the collection
+
+```
+
+{
+  "collection":"name of the collection",
+  "query":"record i want to delete"
+}
+
+
+```
+
+# Delete collection
+
+Deletes a collection in the vector database
+
+```
+
+{
+  "collection":"name of the collection"
+}
+
+
+```
+
+
+# Populate web vector
+
+Does a duckduckgo research and inserts the first results in the vector database
+
+```
+
+{
+  "collection":"name of the collection",
+  "query":"query to send to duck duck go search engine"
+}
+
+
+```
+
+# Update vector
+
+Updates a vector record
+
+```
+
+{
+  "collection":"name of the collection",
+  "prompt":"the prompt that you want to update",
+  "topic":"the topic of the collection",
+  "topic_id":"the id of the topic in the vector database"
+}
+
+```
 
 
 
