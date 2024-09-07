@@ -122,7 +122,7 @@ It will train the ai model from the data stored in the vector database:
 
 In response the api will notify the user with the operation of adding embeddings to the ai model has been completed
 
-# Delete vector
+## Delete vector
 
 Deletes a vector record using a query in the collection
 
@@ -136,7 +136,7 @@ Deletes a vector record using a query in the collection
 
 ```
 
-# Delete collection
+## Delete collection
 
 Deletes a collection in the vector database
 
@@ -150,7 +150,7 @@ Deletes a collection in the vector database
 ```
 
 
-# Populate web vector
+## Populate web vector
 
 Does a duckduckgo research and inserts the first results in the vector database
 
@@ -164,7 +164,7 @@ Does a duckduckgo research and inserts the first results in the vector database
 
 ```
 
-# Update vector
+## Update vector
 
 Updates a vector record
 
